@@ -1,0 +1,163 @@
+%============================================================================
+% CV của Trần Xuân Phát - Bản mẫu LaTeX chuyên nghiệp
+% Định dạng: Cột đơn (Single-column), tối ưu cho hệ thống lọc CV tự động (ATS-friendly)
+% Cấp độ: Junior Frontend Developer
+%============================================================================
+
+\documentclass[10pt,a4paper]{article}
+
+% Khai báo các gói thư viện cơ bản
+\usepackage[utf8]{inputenc}     % Hỗ trợ định dạng đầu vào UTF-8
+\usepackage[T5]{fontenc}        % Hỗ trợ hiển thị ký tự Tiếng Việt có dấu khi biên dịch bằng pdflatex
+\usepackage[vietnamese,english]{babel} % Hỗ trợ dịch và định dạng đa ngôn ngữ
+\usepackage{geometry}           % Căn chỉnh lề trang giấy
+\usepackage{hyperref}           % Tạo và định dạng các liên kết nhấp chuột (Hyperlinks)
+\usepackage{enumitem}           % Tùy biến khoảng cách và định dạng danh sách (bullet points)
+\usepackage{titlesec}           % Tùy biến kiểu dáng tiêu đề phần (\section)
+\usepackage{xcolor}             % Sử dụng màu sắc tùy chỉnh
+\usepackage{fontawesome5}       % Thêm các biểu tượng icon liên hệ (Phone, Email, GitHub...)
+\usepackage{tabularx}           % Bảng tự động giãn cột theo chiều rộng trang giấy
+
+% Cấu hình lề trang (lề 11mm để cân đối chiều cao A4)
+\geometry{
+  a4paper,
+  left=11mm,
+  right=11mm,
+  top=11mm,
+  bottom=11mm
+}
+
+% Định nghĩa màu sắc thương hiệu hiện đại (Slate & Teal Palette)
+\definecolor{primaryColor}{HTML}{1e293b} % Slate/Charcoal - Màu chủ đạo cho tiêu đề lớn
+\definecolor{accentColor}{HTML}{0f766e}  % Deep Teal - Màu nhấn cho đường kẻ và biểu tượng
+\definecolor{textColor}{HTML}{334155}    % Slate Grey - Màu xám tối cho nội dung để dễ đọc
+\definecolor{linkColor}{HTML}{0f766e}    % Deep Teal - Màu cho đường liên kết
+
+% Sử dụng font Helvetica để nét chữ dày dặn và hỗ trợ tiếng Việt tốt hơn
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\linespread{1.08} % Tăng line-height lên 1.08 lần để văn bản thoáng hơn
+
+% Thiết lập màu chữ mặc định cho toàn bộ tài liệu
+\color{textColor}
+
+% Cấu hình các thuộc tính của đường link và metadata của PDF
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=black,
+  pdftitle={CV - Tran Xuan Phat - Junior Frontend Developer},
+  pdfauthor={Tran Xuan Phat}
+}
+
+% Loại bỏ khoảng thụt lề đầu dòng mặc định của đoạn văn
+\setlength{\parindent}{0pt}
+
+% Tùy biến tiêu đề các phần chính (\section) có thanh kẻ ngang phía dưới dùng màu nhấn (accentColor)
+\titleformat{\section}{
+  \large\bfseries\color{primaryColor}
+}{}{0em}{}[\color{accentColor}\titlerule]
+\titlespacing{\section}{0pt}{9pt}{4pt}
+
+% Tùy biến khoảng cách giữa các phần tử trong danh sách liệt kê để giãn rộng hợp lý
+\setlist[itemize]{topsep=0pt, partopsep=0pt, parsep=0pt, itemsep=1.8pt, leftmargin=13pt}
+
+\begin{document}
+\selectlanguage{english} % Ngôn ngữ chính của CV là Tiếng Anh
+
+%============================================================================
+% PHẦN ĐẦU TRANG (HEADER) - TÊN & THÔNG TIN LIÊN HỆ
+%============================================================================
+\begin{center}
+    {\Huge \bfseries \color{primaryColor} TRAN XUAN PHAT} \\
+    \vspace{4pt}
+    {\large \bfseries \color{accentColor} FRESHER FRONTEND DEVELOPER} \\
+    \vspace{8pt}
+    
+    \small
+    % Các nút liên kết thông tin cá nhân kèm icon biểu tượng tương ứng
+    \href{mailto:phattran052004@gmail.com}{\color{primaryColor}\faEnvelope\ \underline{phattran052004@gmail.com}} \ | \ 
+    \href{tel:+84397192664}{\color{primaryColor}\faPhone\ (+84) 397 192 664} \ | \ 
+    {\color{primaryColor}\faMapMarker*}\ Ho Chi Minh City, Vietnam \\
+    \vspace{4pt}
+    \href{https://github.com/xuanphat0505}{\color{primaryColor}\faGithub\ \underline{github.com/xuanphat0505}} \ | \ 
+    \href{https://linkedin.com/in/phattran0505}{\color{primaryColor}\faLinkedin\ \underline{linkedin.com/in/phattran0505}} \ | \ 
+    \href{https://portfolio-web-0505.netlify.app/}{\color{primaryColor}\faGlobe\ \underline{portfolio-web-0505.netlify.app}}
+\end{center}
+
+\vspace{1pt}
+
+%============================================================================
+% TÓM TẮT NĂNG LỰC (SUMMARY)
+%============================================================================
+\section*{SUMMARY}
+Performant-driven Frontend Developer with 1+ years of experience building responsive and scalable web applications using ReactJS and TypeScript. Proven ability in designing modular UI systems, optimizing web performance, and configuring CI/CD workflows. Passionate about writing clean, type-safe code and delivering high-quality, user-centric features.
+
+\vspace{1pt}
+
+%============================================================================
+% KỸ NĂNG CHUYÊN MÔN (TECHNICAL SKILLS)
+%============================================================================
+\section*{TECHNICAL SKILLS}
+\begin{tabularx}{\textwidth}{r|X}
+    \textbf{Front-End} & ReactJS, TypeScript, JavaScript (ES6+), HTML5, CSS3, Redux Toolkit, Context API, Tailwind CSS, Ant Design, Craft.js \\
+    \textbf{Back-End} & Node.js, Express.js, NestJS, RESTful APIs \\
+    \textbf{Database} & MongoDB, MySQL \\
+    \textbf{Tools \& DevOps} & Git, Docker, GitHub Actions, AWS S3, CloudFront, Nginx \\
+    \textbf{Other} & Socket.IO, WebRTC, Firebase, Web Performance Optimization, Responsive Design \\
+\end{tabularx}
+
+\vspace{1pt}
+
+%============================================================================
+% KINH NGHIỆM LÀM VIỆC (WORK EXPERIENCE)
+%============================================================================
+\section*{WORK EXPERIENCES}
+\textbf{Automation Land} \hfill June 2025 -- Present \\
+\textit{Frontend Developer Fresher} \hfill Ho Chi Minh City, Vietnam
+\begin{itemize}
+    \item Designed and developed a modular, drag-and-drop landing page builder from scratch using ReactJS and Craft.js, improving page deployment speeds for marketing teams by 50\%.
+    \item Developed and published a high-performance Zalo Mini App serving 6,000+ active users, integrating secure JWT authentication and optimizing global state.
+    \item Refactored legacy JavaScript codebases to strict TypeScript, establishing comprehensive type safety and reducing runtime bugs by 35\%.
+    \item Implemented automated CI/CD workflows using GitHub Actions and Docker, and configured AWS S3 + CloudFront CDN to optimize asset delivery, reducing LCP by 30\%.
+\end{itemize}
+
+\vspace{1pt}
+
+%============================================================================
+% DỰ ÁN CÁ NHÂN (PROJECTS)
+%============================================================================
+\section*{PROJECTS}
+
+\textbf{\href{https://chat-app-0505.netlify.app}{VChat -- Real-time Chat Application}} \hfill Dec 2025 -- Apr 2026 \\
+\textit{Full Stack Developer} \hfill \href{https://github.com/xuanphat0505/social-network-fe}{\underline{github.com/xuanphat0505/social-network-fe}} \ | \ \href{https://github.com/xuanphat0505/social-network-be}{\underline{github.com/xuanphat0505/social-network-be}} \\
+\textbf{Tech Stack:} ReactJS, Redux Toolkit, Node.js, Express.js, MongoDB, Socket.IO, WebRTC.
+\begin{itemize}
+    \item Built a scalable, real-time 1-on-1 messaging platform with features such as typing indicators, message delivery status, and message revocation utilizing Socket.IO.
+    \item Integrated secure peer-to-peer audio and video calling capability using WebRTC, utilizing STUN/TURN servers to resolve firewall traversal issues.
+    \item Implemented a robust authentication system featuring JWT access/refresh token rotation, HTTP-only cookie storage, and OTP verification via NodeMailer.
+    \item Optimized application performance by implementing virtual list rendering for long message histories (1000+ items) and utilizing memoization to prevent unnecessary React re-renders.
+\end{itemize}
+
+\vspace{3pt}
+
+\textbf{\href{http://movie-web-0505.netlify.app}{Movie Streaming Website}} \hfill Jan 2025 -- May 2025 \\
+\textit{Full Stack Developer} \hfill \href{https://github.com/xuanphat0505/movie-website-fe}{\underline{github.com/xuanphat0505/movie-website-fe}} \ | \ \href{https://github.com/xuanphat0505/movie-website-be}{\underline{github.com/xuanphat0505/movie-website-be}} \\
+\textbf{Tech Stack:} ReactJS, Node.js, Express.js, MongoDB, Socket.IO.
+\begin{itemize}
+    \item Created a fully responsive movie streaming application optimized for desktop, mobile, and smart TV browsers.
+    \item Developed an administrative dashboard from scratch featuring analytical charts, CRUD operations, and role-based access control (RBAC).
+    \item Designed RESTful APIs using Node.js/Express and optimized MongoDB query performance by leveraging aggregation pipelines for complex movie filtering.
+    \item Integrated Socket.IO for real-time system alerts, chat lobbies, and collaborative watch parties.
+\end{itemize}
+
+\vspace{1pt}
+
+%============================================================================
+% HỌC VẤN (EDUCATION)
+%============================================================================
+\section*{EDUCATION}
+\textbf{Posts and Telecommunications Institute of Technology (PTIT)} \hfill 2022 -- 2027 \\
+\textit{Bachelor of Internet of Things (IoT)} \hfill GPA: 3.25 / 4.0
+
+\end{document}
