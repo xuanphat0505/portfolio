@@ -8,6 +8,7 @@ import { Button } from '@/components/ui';
 const ContactSection: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [hasError, setHasError] = useState(false);
   
   const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
   const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
@@ -19,6 +20,7 @@ const ContactSection: React.FC = () => {
     if (!form.current) return;
     
     setIsSubmitting(true);
+    setHasError(false);
     // TODO: Replace these placeholders with your actual EmailJS credentials
     emailjs.sendForm(
       SERVICE_ID, 
@@ -32,7 +34,7 @@ const ContactSection: React.FC = () => {
       form.current?.reset();
     }, (error) => {
       setIsSubmitting(false);
-      alert("[ERROR] Failed to establish handshake. Please try again or use direct mail.");
+      setHasError(true);
       console.error(error);
     });
   };
@@ -148,6 +150,11 @@ const ContactSection: React.FC = () => {
                       'SEND_HANDSHAKE_REQUEST'
                     )}
                   </Button>
+                  {hasError && (
+                    <span role="alert" className="font-mono text-[10px] text-red-500 tracking-wider">
+                      [ERROR] Failed to send the message. Please try again or email me directly.
+                    </span>
+                  )}
                   {isSubmitting && (
                     <span className="font-mono text-[9px] text-primary tracking-widest transition-opacity animate-pulse">
                       // PROCESS: [=========={`>`}.......] 60%

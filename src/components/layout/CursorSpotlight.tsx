@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { useTheme } from '@/contexts/ThemeContext';
+import { useTheme } from '@/hooks/useTheme';
 
 // Component CursorSpotlight cung cấp hiệu ứng đèn rọi nền (Spotlight)
 // và con trỏ chuột tùy biến đàn hồi Squash & Stretch cùng HUD thông tin tọa độ

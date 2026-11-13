@@ -1,23 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Menu, X } from "lucide-react";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
-import { useTheme } from "@/contexts/ThemeContext";
+import { useTheme } from "@/hooks/useTheme";
+
+const navLinks = [
+  { id: "01", name: "HOME", href: "home" },
+  { id: "02", name: "PROJECTS", href: "projects" },
+  { id: "03", name: "EXPERIENCE", href: "experience" },
+  { id: "04", name: "ABOUT", href: "about" },
+  { id: "05", name: "CONTACT", href: "contact" },
+];
+const SECTION_IDS = navLinks.map((link) => link.href);
 
 // Component Navbar hiển thị thanh điều hướng của trang web có hiệu ứng sliding indicator.
 const Navbar: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
-
-  const navLinks = [
-    { id: "01", name: "HOME", href: "home" },
-    { id: "02", name: "PROJECTS", href: "projects" },
-    { id: "03", name: "EXPERIENCE", href: "experience" },
-    { id: "04", name: "ABOUT", href: "about" },
-    { id: "05", name: "CONTACT", href: "contact" },
-  ];
-
-  const activeSection = useScrollSpy(navLinks.map((link) => link.href));
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const activeSection = useScrollSpy(SECTION_IDS);
 
   // Hàm xử lý cuộn mượt khi click vào link
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -35,6 +36,7 @@ const Navbar: React.FC = () => {
 
       window.history.pushState(null, "", `#${id}`);
     }
+    setIsMenuOpen(false);
   };
 
   return (
@@ -106,8 +108,37 @@ const Navbar: React.FC = () => {
           >
             Resume
           </a>
+
+          <button
+            onClick={() => setIsMenuOpen((open) => !open)}
+            className="md:hidden p-2 border border-brand-border hover:border-brand-cyan hover:text-brand-cyan transition-all duration-300 flex items-center justify-center cursor-pointer"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? <X size={14} /> : <Menu size={14} />}
+          </button>
         </div>
       </div>
+
+      {/* Menu điều hướng cho màn hình nhỏ */}
+      {isMenuOpen && (
+        <div className="md:hidden border-t border-brand-border bg-brand-bg">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col">
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.href}`}
+                onClick={(e) => handleScroll(e, link.href)}
+                className={`py-3 font-mono text-[11px] tracking-widest ${
+                  activeSection === link.href ? "text-brand-cyan font-bold" : "text-on-surface-variant"
+                }`}
+              >
+                // {link.id} {link.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

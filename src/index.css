@@ -88,3 +88,8 @@ body {
   background: var(--color-primary);
 }
 
+
+/* Chừa chỗ cho navbar cố định khi cuộn tới một section bằng scrollIntoView */
+html {
+  scroll-padding-top: 80px;
+}

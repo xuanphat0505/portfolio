@@ -27,7 +27,7 @@ const AboutSection: React.FC = () => {
   const pipelineTools = [
     { id: "AWS_S3", icon: <Cloud size={20} />, label: "AWS_S3_STORAGE" },
     { id: "CI_CD", icon: <Terminal size={20} />, label: "GITHUB_ACTIONS" },
-    { id: "AWS_S3", icon: <Cloud size={20} />, label: "AWS_S3_STORAGE" },
+    { id: "CDN", icon: <Cloud size={20} />, label: "AWS_CLOUDFRONT_CDN" },
     { id: "NGINX", icon: <Server size={20} />, label: "REVERSE_PROXY" },
   ];
 

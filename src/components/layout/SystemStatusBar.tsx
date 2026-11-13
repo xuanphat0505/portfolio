@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useTheme } from '@/contexts/ThemeContext';
+import React, { useState, useEffect, useRef } from 'react';
+import { useTheme } from '@/hooks/useTheme';
 
 // Component SystemStatusBar hiển thị thanh trạng thái thời gian thực mô phỏng VS Code
 // Theo dõi tọa độ chuột, thanh cuộn trang, theme hiện tại và thông số môi trường lập trình
 const SystemStatusBar: React.FC = () => {
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const mouseXRef = useRef<HTMLSpanElement>(null);
+  const mouseYRef = useRef<HTMLSpanElement>(null);
   const [scrollPercent, setScrollPercent] = useState(0);
   const [host, setHost] = useState('');
   const { theme } = useTheme();
@@ -15,7 +16,8 @@ const SystemStatusBar: React.FC = () => {
       setHost(window.location.host || 'localhost:5173');
     }
     const handleMouseMove = (e: MouseEvent) => {
-      setCoords({ x: e.clientX, y: e.clientY });
+      if (mouseXRef.current) mouseXRef.current.textContent = `${e.clientX}px`;
+      if (mouseYRef.current) mouseYRef.current.textContent = `${e.clientY}px`;
     };
 
     const handleScroll = () => {
@@ -72,7 +74,7 @@ const SystemStatusBar: React.FC = () => {
 
         {/* Tọa độ chuột thực tế */}
         <div className="hidden sm:block text-on-surface-variant/40 border-l border-outline-variant/15 pl-4">
-          MOUSE_X: <span className="text-primary font-bold">{coords.x}px</span>, MOUSE_Y: <span className="text-primary font-bold">{coords.y}px</span>
+          MOUSE_X: <span ref={mouseXRef} className="text-primary font-bold">0px</span>, MOUSE_Y: <span ref={mouseYRef} className="text-primary font-bold">0px</span>
         </div>
       </div>
 
