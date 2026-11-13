@@ -1,5 +1,8 @@
 import React, { type ReactNode } from 'react';
-import { Navbar, Footer, SystemStatusBar, GridNodeConnector } from '.';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import SystemStatusBar from './SystemStatusBar';
+import GridNodeConnector from './GridNodeConnector';
 
 interface LayoutProps {
   children: ReactNode;
@@ -17,10 +20,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       {/* Hiệu ứng kết nối các giao điểm lưới ô vuông khi di chuột */}
       <GridNodeConnector />
-      
+
       {/* Subtle Glow Effect */}
       <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-cyan/5 blur-[120px] rounded-full pointer-events-none" />
-      
+
       {/* Fixed Navigation */}
       <Navbar />
 
@@ -34,10 +37,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       {/* Real-time System Status Bar (VS Code-like) */}
       <SystemStatusBar />
-
-      {/* Vertical Side Lines (Decorative) */}
-      <div className="fixed left-6 top-0 bottom-0 w-px border-brand-border/30 hidden lg:block" />
-      <div className="fixed right-6 top-0 bottom-0 w-px border-brand-border/30 hidden lg:block" />
     </div>
   );
 };

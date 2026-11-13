@@ -52,10 +52,10 @@ const HeroSection: React.FC = () => {
               </Button>
             </a>
 
-            {/* Link đến liên hệ hoặc About */}
+            {/* Link đến liên hệ */}
             <a
-              href="#about"
-              onClick={(e) => handleScroll(e, "about")}
+              href="#contact"
+              onClick={(e) => handleScroll(e, "contact")}
               className="w-full sm:w-auto"
             >
               <Button variant="outline" className="w-full">

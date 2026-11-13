@@ -1,6 +1,6 @@
 import React from "react";
 import CountUpComponent from "react-countup";
-import { useTheme } from "@/contexts/ThemeContext";
+import { useTheme } from "@/hooks/useTheme";
 
 // Giải quyết vấn đề tương thích import của react-countup trong môi trường Vite + React 19
 const CountUp = (CountUpComponent as any).default || CountUpComponent;

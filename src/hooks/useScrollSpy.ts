@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 // Định nghĩa thuộc tính phụ trên window để theo dõi trạng thái cuộn tự động bằng mã lệnh
@@ -14,17 +14,26 @@ declare global {
  */
 export const useScrollSpy = (sectionIds: string[], offset: number = 100) => {
   const [activeSection, setActiveSection] = useState<string>('');
+  const activeRef = useRef<string>('');
   const location = useLocation();
+  const hash = location.hash.replace('#', '');
 
-  // Đồng bộ activeSection ngay lập tức khi URL hash thay đổi (do người dùng click link)
-  useEffect(() => {
-    const hash = location.hash.replace('#', '');
+  // Đồng bộ activeSection ngay khi URL hash đổi, xử lý ngay lúc render để không gọi setState trong effect
+  const [syncedHash, setSyncedHash] = useState(hash);
+  if (hash !== syncedHash) {
+    setSyncedHash(hash);
     if (hash && sectionIds.includes(hash)) {
       setActiveSection(hash);
-      // Đánh dấu đang thực hiện cuộn chủ động để chặn scroll spy
+    }
+  }
+
+  // Khi vào trang với hash hợp lệ thì khởi tạo section và chặn scroll spy đến khi cuộn xong
+  useEffect(() => {
+    if (hash && sectionIds.includes(hash)) {
+      activeRef.current = hash;
       window.isProgrammaticScroll = true;
     }
-  }, [location.hash, sectionIds]);
+  }, [hash, sectionIds]);
 
   useEffect(() => {
     let fallbackTimeout: number;
@@ -45,7 +54,8 @@ export const useScrollSpy = (sectionIds: string[], offset: number = 100) => {
         return false;
       });
 
-      if (currentSection && currentSection !== activeSection) {
+      if (currentSection && currentSection !== activeRef.current) {
+        activeRef.current = currentSection;
         setActiveSection(currentSection);
         // Cập nhật URL hash mà không làm reload trang hoặc nhảy scroll
         window.history.replaceState(null, '', `#${currentSection}`);
@@ -79,7 +89,7 @@ export const useScrollSpy = (sectionIds: string[], offset: number = 100) => {
       window.removeEventListener('scrollend', handleScrollEnd);
       window.clearTimeout(fallbackTimeout);
     };
-  }, [sectionIds, offset, activeSection]);
+  }, [sectionIds, offset]);
 
-  return activeSection || location.hash.replace('#', '') || sectionIds[0];
+  return activeSection || hash || sectionIds[0];
 };

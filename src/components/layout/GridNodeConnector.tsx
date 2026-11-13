@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useTheme } from '@/contexts/ThemeContext';
+import { useTheme } from '@/hooks/useTheme';
 
 // Component GridNodeConnector vẽ hiệu ứng kết nối các giao điểm của lưới tọa độ (bg-grid)
 // theo vị trí di chuột thời gian thực trên HTML5 Canvas
 const GridNodeConnector: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
-  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
+  const mousePos = useRef({ x: -1000, y: -1000 });
   const [isMobile, setIsMobile] = useState(true);
 
   // Kiểm tra thiết bị di động / có hỗ trợ chuột chính xác không
@@ -29,11 +29,11 @@ const GridNodeConnector: React.FC = () => {
     if (isMobile) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
+      mousePos.current = { x: e.clientX, y: e.clientY };
     };
 
     const handleMouseLeave = () => {
-      setMousePos({ x: -1000, y: -1000 });
+      mousePos.current = { x: -1000, y: -1000 };
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
@@ -72,13 +72,12 @@ const GridNodeConnector: React.FC = () => {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      if (mousePos.x < 0 || mousePos.y < 0) {
+      const { x: mx, y: my } = mousePos.current;
+
+      if (mx < 0 || my < 0) {
         animationFrameId = requestAnimationFrame(draw);
         return;
       }
-
-      const mx = mousePos.x;
-      const my = mousePos.y;
 
       // Xác định khoảng cột và hàng của lưới nằm trong bán kính tìm kiếm quanh con trỏ
       const startCol = Math.floor((mx - radius) / gridSize);
@@ -143,7 +142,7 @@ const GridNodeConnector: React.FC = () => {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [mousePos, theme, isMobile]);
+  }, [theme, isMobile]);
 
   return (
     <canvas
